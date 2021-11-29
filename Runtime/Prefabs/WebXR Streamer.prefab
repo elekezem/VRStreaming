@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataChannel: {fileID: 7977754496362167396}
-  micStream: {fileID: 0}
+  micStream: {fileID: 2687826599651845520}
   streams:
   - {fileID: 4095850535855223832}
   - {fileID: 6236067974398559800}
