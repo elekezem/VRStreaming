@@ -15,27 +15,28 @@ using UnityEngine;
 /// <summary>
 /// Microphone Receiver class is responsible for receiving microphone data from the client
 /// </summary>
-[RequireComponent(typeof(ReceiveAudioViewer))]
+[RequireComponent(typeof(AudioStreamReceiver))]
 [RequireComponent(typeof(AudioSource))]
 public class MicReceiver : MonoBehaviour {
 
     //TODO : This is only working when VRBroadcast SetFullConnection needs to be disabled
+    //TODO: TEST WITH 3.1.2 CHANGES
     //Comment line 125 out. For some reason there is a collision between the reciever and senders
 
     private AudioSource source;
 
     private void OnEnable() {
-        GetComponent<ReceiveAudioViewer>().OnUpdateReceiveAudioClip += OnAudioClip;
-        GetComponent<ReceiveAudioViewer>().OnStartedStream += OnStream;
+        GetComponent<AudioStreamReceiver>().OnUpdateReceiveAudioClip += OnAudioClip;
+        GetComponent<AudioStreamReceiver>().OnStartedStream += OnStream;
         source = GetComponent<AudioSource>();
     }
 
     private void OnDisable() {
-        GetComponent<ReceiveAudioViewer>().OnUpdateReceiveAudioClip -= OnAudioClip;
+        GetComponent<AudioStreamReceiver>().OnUpdateReceiveAudioClip -= OnAudioClip;
     }
 
     private void Update() {
-        AudioStreamTrack track = GetComponent<ReceiveAudioViewer>().Track as AudioStreamTrack;
+        AudioStreamTrack track = GetComponent<AudioStreamReceiver>().Track as AudioStreamTrack;
         Debug.LogError("UPDATE : " + track.Renderer);
         //TODO this is replaying old clip if not ready
 
@@ -52,7 +53,7 @@ public class MicReceiver : MonoBehaviour {
     }
 
     void OnStream(string connectionId) {
-        Debug.LogError("GOT STREAM START "  + GetComponent<ReceiveAudioViewer>().Clip);
+        Debug.LogError("GOT STREAM START "  + GetComponent<AudioStreamReceiver>().Clip);
 
     }
 
